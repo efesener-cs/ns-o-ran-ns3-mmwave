@@ -1,0 +1,17 @@
+.git
+.agents
+.aws
+.codex
+build/
+build-dir/
+cmake-cache/
+cmake-build-*/
+.cache/
+*.pcap
+*.log
+*.out
+*.eps
+CellIdStats*.txt
+Dl*Stats*.txt
+Ul*Stats*.txt
+*Trace*.txt

@@ -1,3 +1,5 @@
+#fork for original version with docker support 
+
 # ns3-mmwave fork for ns-O-RAN
 
 ================================
@@ -9,6 +11,31 @@ This module enables the support for running multiple terminations of an O-RAN-co
 ## How to use
 
 Please refer to this [quick start guide](https://openrangym.com/tutorials/ns-o-ran) that presents a tutorial to bridge ns-O-RAN and Colosseum RIC (i.e., OSC RIC bronze reduced) ns-O-RAN.
+
+### Run with Docker
+
+Build the image from the repository root:
+
+```sh
+docker build -t ns-o-ran-ns3 .
+```
+
+Open a shell in the prebuilt image and run an example:
+
+```sh
+docker run --rm -it ns-o-ran-ns3
+./ns3 run mmwave-simple-epc
+```
+
+For development, mount the source tree from the host. Since that mount overlays the prebuilt source and build, configure and compile the mounted tree once:
+
+```sh
+docker run --rm -it -v "$PWD:/workspace" ns-o-ran-ns3
+./ns3 configure --disable-python-bindings --enable-examples --disable-gtk
+./ns3 build -j 2
+```
+
+Then run an example or scenario script from `/workspace`, such as `./ns3 run mmwave-simple-epc` or `bash run-simulations.sh`. Rebuild the image after changing dependencies or the Docker build configuration; rebuild ns-3 inside a mounted source tree after changing C++ code with `./ns3 build`.
 
 Additional material:
 
